@@ -33,6 +33,7 @@ namespace BL
 
                     if (query != null)
                     {
+
                         foreach (var obj in query)
                         {
                             Empleado empleadoBuscar = new Empleado();
