@@ -1,0 +1,47 @@
+﻿@model BL.Empleado
+@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <h2>Formulario de empleado</h2>
+
+    <div class=" row">
+        <div class="col-md-12">
+            @using (Html.BeginForm("Form","Empleado",FormMethod.Post,new { enctype = "multipart/form-data" }))
+            {
+                <div class="form-horizontal">
+
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            @Html.LabelFor(model => model.Nombre)
+                            @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            @Html.LabelFor(model => model.Puesto.IdPuesto)
+                            @Html.DropDownListFor(model => model.Puesto.IdPuesto, new SelectList(Model.Puesto.PuestoList, "IdPuesto", "DescripcionPuesto"), "Selecciona un opcion", new { @class = "form-control" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            @Html.LabelFor(model => model.Departamento.IdDepartamento)
+                            @Html.DropDownListFor(model => model.Departamento.IdDepartamento, new SelectList(Model.Departamento.DepartamentoList, "IdDepartamento", "DescripcionDepartamento"), "Selecciona un opcion", new { @class = "form-control" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            <input type="submit" value="Guardar" class="btn btn-success" />
+                            @Html.ActionLink("Regresar", "GetAll", "Empleado", htmlAttributes: new { @class = "btn btn-danger" })
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

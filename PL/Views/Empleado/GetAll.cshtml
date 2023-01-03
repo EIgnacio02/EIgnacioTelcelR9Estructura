@@ -1,0 +1,56 @@
+﻿@model BL.Empleado
+@{
+    ViewBag.Title = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+
+    <h2>Empleado</h2>
+
+    <div class="row">
+        <div style="float:right">
+            @Html.ActionLink("Agregar", "Form", "Empleado", htmlAttributes: new { @class = "btn btn-success" })
+        </div>
+    </div>
+
+    @using (Html.BeginForm("GetAll", "Empleado", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="col-md-3">
+            @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", @placeholder = "Nombre" })
+        </div>
+        <div class="col-md-3">
+            <input type="submit" value="Buscar" class="btn btn-primary" />
+        </div>
+    }
+
+
+    <br />
+    <table class="table table-responsive">
+        <thead>
+            <tr>
+                @*<th>Id Empleado</th>*@
+                <th>Nombre</th>
+                @*<th>Id Puesto</th>*@
+                <th>Descripcion Puesto</th>
+                @*<th>Id Departamento</th>*@
+                <th>Descripcion Departamento</th>
+                <th>Eliminar</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (BL.Empleado empleado in Model.EmpleadoList)
+            {
+                <tr>
+                    @*<td>@Empleado.IdEmpleado</td>*@
+                    <td>@empleado.Nombre</td>
+                    <td>@empleado.Puesto.DescripcionPuesto</td>
+                    <td>@empleado.Departamento.DescripcionDepartamento</td>
+
+                    <td class="text-center"><a class="btn btn-danger glyphicon glyphicon-trash" href="@Url.Action("Delete", "Empleado", new { IdEmpleado = empleado.IdEmpleado })" onclick="return confirm('Estas seguro que deseas eliminar este registro?');"></a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
